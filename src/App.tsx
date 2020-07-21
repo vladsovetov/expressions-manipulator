@@ -99,8 +99,6 @@ function App() {
     ${custom1Rules}
     ${custom2Rules}
     `);
-    console.log(parsedExpressions);
-    console.log(inputs);
 
     const variables: { [key: string]: boolean | number } = {};
     inputs.forEach((input) => {
