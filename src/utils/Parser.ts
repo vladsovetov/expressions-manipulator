@@ -1,4 +1,4 @@
-type BranchTail =
+export type BranchTail =
   | {
       [key: string]: BranchTail;
     }
@@ -11,14 +11,15 @@ const Parser = (() => {
   };
 
   const buildRulesTree = (expressions: string[]) => {
-    console.log('buildTree');
     const tree = {};
     for (let index = 0; index < expressions.length; index++) {
+      if (expressions[index].trim() === '') {
+        continue;
+      }
       const [expressionLeafs, expressionResult] = expressions[index].split(
         /\s*=>\s*/
       );
       const leafs = expressionLeafs.split(/\s+/).concat('=>', expressionResult);
-      console.log('leafs', leafs);
       addLeafs(tree, leafs);
     }
     return tree;
@@ -26,10 +27,7 @@ const Parser = (() => {
 
   const addLeafs = (branchTail: BranchTail, leafs: string[]) => {
     const leaf = leafs.shift();
-    // console.log('leaf', leaf);
     if (typeof leaf !== 'undefined') {
-      // console.log('add more');
-
       if (typeof branchTail !== 'string') {
         if (leafs.length > 1) {
           if (typeof branchTail[leaf] === 'undefined') {

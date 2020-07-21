@@ -1,4 +1,4 @@
-import Parser from './parser';
+import Parser from './Parser';
 
 describe('expression parser', () => {
   describe('logical expression', () => {
